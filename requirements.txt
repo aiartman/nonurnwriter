@@ -1,0 +1,12 @@
+Flask
+flask-wtf
+wtforms
+requests>=2.0.0
+pandas
+supabase
+python-dotenv
+waitress
+groq
+openai
+tiktoken
+

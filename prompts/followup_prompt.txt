@@ -1,0 +1,44 @@
+Your task is to craft a follow-up email that addresses key objections and gently nudges the recipient towards action. This email will be a reply to the original message, so there's no need for a subject line. Follow these guidelines:
+
+Opening Line: Objection to overcome: "I'm too busy to deal with follow-up emails."  We will be sending this email 2 or 3 days after the original email. 
+
+Context Reminder: Briefly recap the main point from the previous email, refreshing their memory without being repetitive. Keep it to 1-2 sentences max. Objection to overcome: "I don't remember your initial email or why it matters."
+
+New Insight: Introduce a fresh piece of information related to their pain point. This could be a recent industry trend, a new case study, or a practical tip addressing their specific challenges. Use data or statistics when possible. Objection to overcome: "This doesn't align with my current priorities."
+
+Success Story: Share a concise, relatable success story from someone in a similar position who has benefited from your solution. Use specific numbers and tangible results. Keep it to 2-3 sentences. Objection to overcome: "I'm not convinced this is worth my time or effort."
+
+Value Proposition: Clearly state how your solution can save them time, increase efficiency, or solve a specific problem they're facing. Be concrete and quantifiable if possible. Objection to overcome: "I don't see how this directly benefits me."
+
+No-Pressure Line: Include a statement that gives them an easy out if they're not interested. This demonstrates respect for their time and decision-making process.
+
+Simple CTA: Make the call-to-action even simpler than in the first email. Ask them to reply with a single word or number to indicate their interest level. Example: "Just reply with a yes if you'd like to learn more."
+
+Tone and Style: Maintain a friendly, helpful, and non-pushy tone throughout the email. Use conversational language and avoid jargon. The email should feel like a gentle reminder from a knowledgeable colleague rather than a sales pitch.
+
+
+Remember, the goal is to re-engage the recipient by providing additional value and addressing potential objections, while respecting their time and decision-making autonomy. As this is a reply, ensure the tone is consistent with the original email and builds upon the previous conversation naturally.
+
+Start with the first line of body copy and end with Sam. No introduction is necessary. No yapping. Do not put anything in brackets. This will be sent to the recipient as it is. 
+
+Here is a good example of a follow up email:
+
+Hey James,
+
+Last week I reached out about how you could save time on LinkedIn outreach for Magna Pest Solutions by automating some of your tasks.  I know you’re busy, but recent studies show that automating just 10% of your daily tasks can free up nearly an hour each day.
+
+One new finding that might interest you: personalized automated messages have been shown to outperform generic messages by a whopping 400% in terms of engagement.  This allows you to build stronger relationships on LinkedIn without dedicating all your time to the platform.
+
+Sanchez Pest Control, another company in San Antonio, was having similar time management challenges. After automating their LinkedIn outreach, they managed to triple their response rate and freed up enough time to launch a new commercial service line, increasing revenue by 15%.
+
+Automating your outreach could similarly free up your schedule, allowing you to prioritize strategic initiatives that grow Magna Pest Solutions.  No pressure at all, but if this sounds helpful just reply with  just reply ""yes"" or ""no"" and I’ll share a short video explaining how it works.
+
+Sam
+
+End of example.
+
+Here is the original email:
+
+```
+Original Email:
+{{original_email}}

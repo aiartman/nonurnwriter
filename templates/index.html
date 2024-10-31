@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Generator Dashboard</title>
+    <!-- Include Tailwind CSS and FontAwesome for styling and icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Email Generator Dashboard</h1>
+            <button id="themeToggle" class="p-2 rounded-full hover:bg-blue-700 transition duration-300">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-6">
+        <!-- Upload Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 col-span-2">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Upload CSV</h2>
+                <div class="flex items-center space-x-4 mb-4">
+                    <label for="csvFile" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
+                        <i class="fas fa-file-upload mr-2"></i>Choose File
+                        <input type="file" id="csvFile" accept=".csv" class="hidden">
+                    </label>
+                    <span id="fileName" class="text-gray-600 dark:text-gray-300">No file chosen</span>
+                </div>
+                <div class="flex space-x-4">
+                    <button id="uploadBtn" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition duration-300 flex-grow">
+                        <i class="fas fa-cog mr-2"></i>Generate Emails
+                    </button>
+                    <button id="cancelBtn" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition duration-300 hidden">
+                        <i class="fas fa-times mr-2"></i>Cancel
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Statistics Section -->
+            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Statistics</h2>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Total Emails Generated</h3>
+                        <p id="totalEmails" class="text-3xl font-bold text-blue-600 dark:text-blue-400">0</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Average Processing Time</h3>
+                        <p id="avgProcessingTime" class="text-3xl font-bold text-green-600 dark:text-green-400">0 s</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Section -->
+        <div id="progressContainer" class="mt-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 hidden">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Progress</h2>
+            <div class="mb-4">
+                <div class="bg-gray-200 dark:bg-gray-700 rounded-full h-6 overflow-hidden">
+                    <div id="progressBar" class="bg-blue-500 h-6 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
+                </div>
+                <div id="progressText" class="text-center mt-2 font-semibold text-gray-700 dark:text-gray-300">0%</div>
+            </div>
+            <!-- New Time Information Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div class="bg-blue-100 dark:bg-blue-800 p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-2">
+                        <i class="fas fa-clock mr-2"></i>Time Elapsed
+                    </h3>
+                    <p id="timeElapsed" class="text-2xl font-bold text-blue-600 dark:text-blue-300">00:00:00</p>
+                </div>
+                <div class="bg-green-100 dark:bg-green-800 p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-green-800 dark:text-green-200 mb-2">
+                        <i class="fas fa-hourglass-half mr-2"></i>Estimated Time Left
+                    </h3>
+                    <p id="timeLeft" class="text-2xl font-bold text-green-600 dark:text-green-300">Calculating...</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <p id="currentFile" class="text-gray-600 dark:text-gray-400"></p>
+                <p id="avgTimePerEmail" class="text-gray-600 dark:text-gray-400"></p>
+            </div>
+        </div>
+        
+        <!-- Download Section -->
+        <div id="downloadContainer" class="mt-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 hidden">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Download Generated Emails</h2>
+            <a href="/download_csv" id="downloadBtn" class="bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-600 transition duration-300 inline-block">
+                <i class="fas fa-download mr-2"></i>Download CSV
+            </a>
+        </div>
+        
+        <!-- Processing History Section -->
+        <div class="mt-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Processing History</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-800">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                            <th class="py-2 px-4 border-b text-left text-gray-800 dark:text-white">File Name</th>
+                            <th class="py-2 px-4 border-b text-left text-gray-800 dark:text-white">Date Processed</th>
+                            <th class="py-2 px-4 border-b text-left text-gray-800 dark:text-white">Emails Generated</th>
+                            <th class="py-2 px-4 border-b text-left text-gray-800 dark:text-white">Processing Time</th>
+                            <th class="py-2 px-4 border-b text-left text-gray-800 dark:text-white">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include your JavaScript file -->
+    <script>
+        // Add this at the end of your body tag, before including main.js
+        window.initialProgress = {{ progress|tojson|safe }};
+    </script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <!-- Include additional scripts, e.g., for Tailwind CSS or FontAwesome -->
+</body>
+</html>

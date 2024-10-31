@@ -1,0 +1,83 @@
+You task is to write a cold email with these conditions. Here are the conditions to write a cold email. I will give you a list of objections for the reader to not take actions. You must overcome them.
+
+The subject line should appear like its from a potential buyer of their product or their co worker. subject lines should not sell the offer at all. That is not the purpose. The purpose is to get them curious. They should under no condition think that this is a marketing email trying to sell them something. The best example of this is: You stole my stapler.
+
+The first line is the preview line they read, it should make them curious to open the email, otherwise they mark it as spam. It should continue the theme introduced in the subject line and continue on it. It should not feel like a bait and switch. Include the first line in the email body.
+
+Make the transition between flow smoothly.
+
+The next line is where you take notice of an action they took, example it could be a writing a post, or tweeting, etc.  Objection: We can't introduce a product because they will say I didn't ask for this. Then he will go on to say, how do you even know that I have this pain? Actions can be internal - We say because of this action you took, you must have this pain. It can also be external, because of the changes in world, rules, etc. you must have this pain.
+
+Now introduce a new plan, by focusing on activities they secretly hate doing/are a big pain for them in their every day work flow. Write the pain in form of symptoms. Here is what that means -
+Symptoms are Things they hate about the task, that are visible to a third person. be in the moment come up with scenarios
+Symptoms Pin point the moment they are in pain.
+Example 1: a person who is mailing Letters to prospects by hand - symptoms are - mouth dry licking stamps, papercuts
+Example 2: CEO who is Alcoholic -  symptoms are  his eyes look red, breath smells of alcohol
+Objection here: This doesn't solve my urgent problem. The urgent problem will be the task they are focusing on today.
+
+The next line will introduce the proof. Someone exactly like them (their competitor, someone in their city) has used it and gotten the results they wanted using our product. Be very specific with the proof. Talk in numbers when you can. Objection: I don't know if this product is good or worth my time.
+
+The final line is the CTA - It should be very simple. Give them a simple yes or no question to respond to. We are asking them to reply to our email to find out the solution. It will be in the form of a short video.
+Only output the subject line and the email body. There is no need to provide any more details.
+Sign off the email with [Your name]
+
+Here are some examples:
+
+Product: Linkedin outreach automation
+They hate doing outreach - writing messages, commenting on their posts, etc
+
+Example Email: 
+
+Subject: Did you see that tweet from Elon?
+
+Body:
+
+Hey Renat,
+
+Just saw Elon's crazy tweet about AI and it made me think of your LinkedIn post last month on the environmental impact of large AI models. You made some really insightful points about the need for more efficient, smaller models.
+
+I know managing your startup keeps you super busy and outreach on LinkedIn can be a huge time suck. Commenting on posts, writing messages, following up - it all adds up fast. 
+
+But what if there was a way to automate a lot of that busy work so you could focus on the high-level strategy and product development that really moves the needle for Wonderslide?
+
+Arvid from Visily, another AI design startup, started using an outreach automation tool recently. In just a month, he 5x'd his connection rate and booked 12 sales calls with ideal customers. Pretty impressive results.
+
+Anyways, let me know if you'd be interested in seeing a quick video on how it works. No pressure at all, just reply "yes" or "no" and I'll send it over if you're curious to learn more.
+
+Cheers,
+Sam
+
+
+Product: Linkedin outreach automation
+They hate doing outreach - writing messages, commenting on their posts, etc
+
+Example email 2: 
+
+Subject Line: Did your LinkedIn messages go to the wrong person too?
+
+Body:
+
+Hi Raks,
+
+I couldn't help but notice your recent post about leveraging LinkedIn for lead generation.
+
+Ever had one of those days where it feels like your LinkedIn messages are just vanishing into the void?
+
+I saw that insightful post you shared and the follow-up comments it generated—clearly, you're driving engagement, but that must take a chunk of your time.
+
+Imagine being able to streamline your outreach without having to personally write and comment on every single post. Intriguing, isn't it?
+
+I had a chat with Visily, they were in the same boat. They've now slashed their outreach time by 50% and still seen a 40% bump in lead generation.
+
+Would you be curious to know how they managed this?
+
+Best,
+Sam
+
+End of examples. 
+
+
+Here is the product you are selling : Linkedin outreach automation
+They hate doing outreach - writing messages, commenting on their posts, etc.
+No yapping. Start with subject line and end with Sam. 
+ 
