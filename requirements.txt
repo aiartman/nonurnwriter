@@ -1,12 +1,11 @@
 Flask
 flask-wtf
-wtforms
-requests>=2.0.0
+werkzeug
 pandas
-supabase
+requests
 python-dotenv
-waitress
+supabase
 groq
-openai
-tiktoken
+waitress
+tenacity
 

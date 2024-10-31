@@ -1,8 +1,8 @@
 import requests
 import os
 import logging
-import json
 from requests.exceptions import RequestException
+from retry_decorator import retry
 
 class RapidAPIHelper:
     def __init__(self):
@@ -18,14 +18,12 @@ class RapidAPIHelper:
             "x-rapidapi-host": self.api_host,
             "Content-Type": "application/json"
         }
-        
-        # Log initialization
-        logging.error(f"RapidAPIHelper initialized with host: {self.api_host}")
-        logging.error(f"API Key present: {'Yes' if self.api_key else 'No'}")
+        logging.error("RapidAPIHelper initialized")
 
+    @retry(Exception, tries=3, delay=2, backoff=2)
     def get_linkedin_profile(self, linkedin_url, email):
         """
-        Fetch LinkedIn profile data using the new API endpoint
+        Fetch LinkedIn profile data with retry logic
         """
         try:
             # Clean and standardize URL
@@ -34,64 +32,63 @@ class RapidAPIHelper:
                 if not linkedin_url.startswith('http'):
                     linkedin_url = 'https://' + linkedin_url.lstrip('/')
                 linkedin_url = linkedin_url.rstrip('/')
-                
+            
             payload = {"link": linkedin_url}
+            logging.error(f"Attempting API request for profile: {linkedin_url}")
             
             # Log request details
-            logging.error(f"Making API request with:")
-            logging.error(f"URL: {self.base_url}")
-            logging.error(f"Headers: {json.dumps({k: '***' if k == 'x-rapidapi-key' else v for k, v in self.headers.items()})}")
-            logging.error(f"Payload: {json.dumps(payload)}")
+            logging.error(f"Request URL: {self.base_url}")
+            logging.error(f"Request payload: {payload}")
             
-            # Make the request
             response = requests.post(self.base_url, json=payload, headers=self.headers)
-            
-            # Log response status
             logging.error(f"Response status code: {response.status_code}")
-            logging.error(f"Response headers: {dict(response.headers)}")
             
-            # Try to get response text safely
-            try:
-                response_text = response.text
-                logging.error(f"Raw response text (first 500 chars): {response_text[:500]}...")
-            except Exception as e:
-                logging.error(f"Error getting response text: {str(e)}")
-                response_text = "Unable to get response text"
+            # If response is not successful, raise exception for retry
+            if response.status_code != 200:
+                logging.error(f"API request failed with status {response.status_code}")
+                logging.error(f"Response content: {response.text[:500]}...")
+                raise RequestException(f"API request failed with status {response.status_code}")
             
-            response.raise_for_status()
+            data = response.json()
+            logging.error(f"Response JSON structure: {list(data.keys())}")
             
-            # Parse JSON response
-            try:
-                data = response.json()
-                logging.error(f"Successfully parsed JSON response")
-                logging.error(f"Response keys: {list(data.keys())}")
-                
-                if data.get('success') and data.get('status') == 200:
-                    profile_data = data.get('data')
-                    if profile_data:
-                        logging.error(f"Successfully retrieved profile data")
-                        logging.error(f"Profile data keys: {list(profile_data.keys()) if isinstance(profile_data, dict) else 'Not a dict'}")
-                        return profile_data
-                    else:
-                        logging.error("Profile data is empty in the response")
-                        return None
+            if data.get('success') and data.get('status') == 200:
+                profile_data = data.get('data')
+                if profile_data:
+                    logging.error(f"Successfully retrieved profile data for: {profile_data.get('fullName', 'Unknown')}")
+                    return profile_data
                 else:
-                    error_msg = data.get('message', 'Unknown error')
-                    logging.error(f"API returned error: {error_msg}")
-                    return None
-                    
-            except json.JSONDecodeError as e:
-                logging.error(f"JSON decode error: {str(e)}")
-                logging.error(f"Response content that failed JSON parsing: {response_text[:500]}...")
-                return None
+                    logging.error("Profile data is empty in the response")
+                    raise Exception("Empty profile data received")
+            else:
+                error_msg = data.get('message', 'Unknown error')
+                logging.error(f"API returned error: {error_msg}")
+                raise Exception(f"API error: {error_msg}")
                 
         except RequestException as e:
             logging.error(f"Request error: {str(e)}")
-            logging.error(f"Request details: URL={self.base_url}, Payload={payload}")
-            return None
+            raise
+        except ValueError as e:
+            logging.error(f"JSON decode error: {str(e)}")
+            raise
         except Exception as e:
             logging.error(f"Unexpected error: {str(e)}")
-            logging.error(f"Full error context: {str(e.__class__.__name__)}")
-            import traceback
-            logging.error(f"Traceback: {traceback.format_exc()}")
-            return None
+            raise
+
+    @retry(Exception, tries=2, delay=1)
+    def validate_profile_data(self, profile_data):
+        """
+        Validate that we have the minimum required data
+        """
+        required_fields = ['fullName', 'headline', 'experiences']
+        missing_fields = [field for field in required_fields if not profile_data.get(field)]
+        
+        if missing_fields:
+            logging.error(f"Missing required fields: {missing_fields}")
+            raise ValueError(f"Missing required fields: {missing_fields}")
+        
+        if not profile_data.get('experiences'):
+            logging.error("No experience data found")
+            raise ValueError("No experience data found")
+            
+        return True
